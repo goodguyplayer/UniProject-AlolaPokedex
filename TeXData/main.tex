@@ -1,12 +1,21 @@
-\documentclass{book}
+\documentclass{report}
 \usepackage[utf8]{inputenc}
 %\usepackage{mathabx}
+\usepackage{hyperref}
 \usepackage{authblk}
 \usepackage{array}
 \usepackage{float}
 
-\title{ }
-\author{To add}
+\title{Projeto Pokedex (Alola Variant) - EEN251-Microcontroladores e Sistemas Embarcados}
+\author{
+    Caio Cruz Alfonso Garcia - 15.01580-7
+    \and
+    Henrique Silva Godoy - 16.01147-3
+    \and
+    Nathan Brito da Silva - 17.00531-0
+    \and
+    Carolina de Carvalho Gutierrez - 18.00576-4
+}
 \date{ }
 
 \usepackage{natbib}
@@ -17,6 +26,11 @@
 \begin{document}
 \maketitle
 \tableofcontents{}
+\newpage
+\subfile{Chapters/geral}
+\subfile{Chapters/fisica}
+\subfile{Chapters/hardware}
+\subfile{Chapters/software}
 
 %Links.:
 % https://www.overleaf.com/learn/latex/Sections_and_chapters

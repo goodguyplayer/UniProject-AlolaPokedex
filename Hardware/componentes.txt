@@ -1,0 +1,5 @@
+Raspberry Pi Pico
+
+Touchscreen - To define
+Memory - To define
+Audio - To define

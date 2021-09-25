@@ -1,5 +1,13 @@
 Raspberry Pi Pico
 
-Touchscreen - To define
+Touchscreen - https://www.filipeflop.com/produto/display-lcd-tft-touch-3-5-raspberry-pi/ ?
+	- ili9486
+	- xpt2046
+	Repos encontrados para auxiliar.:
+		- https://github.com/Bodmer/TFT_eSPI
+		- https://github.com/bkosciow/gfxlcd
+		- https://github.com/juj/fbcp-ili9341/
+		- https://github.com/rdagger/micropython-ili9341
+	
 Memory - To define
 Audio - To define

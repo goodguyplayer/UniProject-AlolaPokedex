@@ -26,4 +26,4 @@ class PokemonSpecies:
 
     def getIDInUrl(self, url: str):
         output = url.split("/")
-        return output[-2]
+        return (output[-2]).strip()

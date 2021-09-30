@@ -21,5 +21,9 @@ class PokemonSpecies:
     def setVariety(self, variety:list):
         for i in variety:
             if "alola" in i.pokemon.name:
-                return i.pokemon.url
-        return variety[0].pokemon.url
+                return self.getIDInUrl(i.pokemon.url)
+        return self.getIDInUrl(variety[0].pokemon.url)
+
+    def getIDInUrl(self, url: str):
+        output = url.split("/")
+        return output[-2]

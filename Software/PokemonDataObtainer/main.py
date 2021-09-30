@@ -3,6 +3,8 @@ from time import sleep
 from models.pokedex import Pokedex
 from models.pokemon import Pokemon
 from models.pokemonspecies import PokemonSpecies
+import PIL.Image as Image
+import io
 
 if __name__ == '__main__':
     test = Pokedex(17)

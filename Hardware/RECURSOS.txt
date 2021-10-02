@@ -1,0 +1,2 @@
+https://helloraspberrypi.blogspot.com/2021/01/raspberry-pi-picomicropython-320x240.html 
+https://www.rototron.info/projects/esp32-pwned-password-checker/

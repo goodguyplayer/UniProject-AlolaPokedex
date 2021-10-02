@@ -1,2 +1,6 @@
 https://helloraspberrypi.blogspot.com/2021/01/raspberry-pi-picomicropython-320x240.html 
 https://www.rototron.info/projects/esp32-pwned-password-checker/
+https://aconfluence.no/display/SS/TFT+320QVT+9341+3.2+Inch+LCD+Display+Module?desktop=true&macroName=view-file
+https://aconfluence.no/pages/viewpage.action?pageId=38240312
+http://www.dimdim.gr/2013/01/3-2-tft-pinout-connection-to-arduino-mega-or-due/3-2-tft-pinout-xls/
+http://www.lcdwiki.com/3.2inch_SPI_Module_ILI9341_SKU:MSP3218

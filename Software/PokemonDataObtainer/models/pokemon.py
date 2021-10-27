@@ -5,8 +5,8 @@ import requests
 class Pokemon:
     def __init__(self, id:str):
         self.pokemon = pb.pokemon(int(id))
-        #self.sprite = self.pokemon.sprites.front_default
-        self.sprite = requests.get(self.pokemon.sprites.front_default).content
+        self.sprite = self.pokemon.sprites.front_default
+        #self.sprite = requests.get(self.pokemon.sprites.front_default).content
         self.stats = self.setStats(self.pokemon.stats)
 
     def setStats(self, stats: list):

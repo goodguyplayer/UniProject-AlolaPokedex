@@ -9,9 +9,12 @@ if __name__ == '__main__':
             file_in = "../pokemondata/" + i
             file_out = i.replace(".png", ".bmp")
             img = Image.open(file_in)
-            if len(img.split()) == 4:
-                r, g, b, a = img.split()
-                img = Image.merge("RGB", (r, g, b))
+            helper = img.split()
+            if len(img.split()) == 1:
+                #r, g, b, a = img.split()
+                #img = Image.merge("RGBA", (r, g, b, a)).convert("P", palette=Image.ADAPTIVE, colors=24)
+                img = img.convert("RGB", colors=24)
+                #img = changeColorDepth(im, 16).convert("P", palette=Image.ADAPTIVE, colors=8)
                 img.save(file_out)
             else:
                 img.save(file_out)

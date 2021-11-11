@@ -1,5 +1,8 @@
-#include <ArduinoJson.h>
-#include <SoftwareSerial.h>
+/*This code is to use with 2.4" TFT LCD touch screen shield, it reads bmp images stored on SD card
+ *and shows them on the screen
+ *Refer to SurtrTech.com for more details 
+ */
+
 #include <SPFD5408_Adafruit_GFX.h>    // Core graphics library
 #include <SPFD5408_Adafruit_TFTLCD.h> // Hardware-specific library
 #include <SPI.h>
@@ -10,61 +13,52 @@
 #define LCD_WR A1 // LCD Write goes to Analog 1
 #define LCD_RD A0 // LCD Read goes to Analog 0
 
-#define SD_CS 10  //SD card pin on your shield
+#define SD_CS 53  //SD card pin on your shield
 
-SoftwareSerial linkSerial(0, 1);
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, A4);
 
-void setup() {
-
-  // Enable serial
+void setup()
+{
+ 
   Serial.begin(9600);
-
-  // Segment for shield & sd card
+  Serial1.begin(4800);
   tft.reset();
   uint16_t identifier = tft.readID();
-  pinMode(10, OUTPUT);
-  digitalWrite(10, HIGH);
+  pinMode(SD_CS, OUTPUT);
+  digitalWrite(SD_CS, HIGH);
   tft.begin(identifier);
   if (!SD.begin(SD_CS)) {
   progmemPrintln(PSTR("failed!"));
   return;
   }
-
-  // wait for serial port to connect.
-  while (!Serial) continue;
-
-}
-
-void loop() {
-  // Message received
-  if (Serial.available()){
-
-    // Allocate JSON document
-    StaticJsonDocument<300> doc;
-    DeserializationError err = deserializeJson(doc, Serial);
-
-    // No error. 
-    if (err == DeserializationError::Ok) 
-    {
-      bmpDraw("10.bmp", 0, 0);
-      // bmpDraw(doc["filename"], 0, 0);
-    } 
-
-    // Error.
-    else 
-    {
-      // Print error to the "debug" serial port
-      Serial.println(err.c_str());
   
-      // Flush all bytes in the "link" serial port buffer
-      while (Serial.available() > 0)
-        Serial.read();
-    }
-  }
 }
+
+void loop()
+{
+  //bmpDraw("10.bmp", 0, 0);      //Calling the bmpDraw function ("Name_of_your_image.bmp",x,y) (x,y) is the starting position of the picture drawing
+while(Serial1.available() > 0 ){
+      String str = Serial1.readString();
+      if(str.indexOf("b") > -1){
+        //char* returnme = str.c_str();
+        ////Serial.print(returnme);
+        str.replace("\n", "");
+        //Serial.print(str.c_str());
+        bmpDraw(str.c_str(), 0, 0);
+       //Serial.println(str);
+        
+      } else{
+        Serial.println("unknown");
+      }
+    }
+}
+
 
 #define BUFFPIXEL 20           //Drawing speed, 20 is meant to be the best but you can use 60 altough it takes a lot of uno's RAM         
+
+//Drawing function, reads the file from the SD card and do the 
+//conversion and drawing, also it shows messages on the Serial monitor in case of a problem
+//No touchy to this function :D
 
 void bmpDraw(char *filename, int x, int y) {
 
@@ -92,7 +86,7 @@ void bmpDraw(char *filename, int x, int y) {
   Serial.println('\'');
   // Open requested file on SD card
   if ((bmpFile = SD.open(filename)) == NULL) {
-    progmemPrint(PSTR("File not found"));
+    progmemPrintln(PSTR("File not found"));
     return;
   }
 
@@ -184,7 +178,7 @@ void bmpDraw(char *filename, int x, int y) {
   }
 
   bmpFile.close();
-  if(!goodBmp) progmemPrint(PSTR("BMP format not recognized."));
+  if(!goodBmp) progmemPrintln(PSTR("BMP format not recognized."));
 }
 
 // These read 16- and 32-bit types from the SD card file.

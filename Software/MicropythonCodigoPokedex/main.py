@@ -5,7 +5,8 @@ import time
 # Serial 
 def sendUART(data, uart):
     jsonstring = json.dumps(data)
-    uart.write(b'' + jsonstring + '\n\r')
+    buffer = b'%s' + data
+    uart.write(buffer + '\n\r')
     time.sleep(0.1)
 
 # DEBUG
@@ -42,7 +43,7 @@ while True:
         else:
             count += 1
         
-        sendUART({"file": pokemons[count] + ".bmp" }, uart)
+        sendUART(pokemons[count] + ".bmp", uart)
         #readSERIAL(uart1) # Debug 
         
     if back.value():
@@ -50,7 +51,7 @@ while True:
             count = len(pokemons) - 1
         else:
             count -= 1
-        sendUART({"file": pokemons[count] + ".bmp" }, uart)
+        sendUART(pokemons[count] + ".bmp", uart)
         #readSERIAL(uart1) # Debug 
         
     time.sleep(0.5)
